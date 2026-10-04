@@ -1,0 +1,44 @@
+/* ------------------------------------------------------------------
+   PAVAN EXPRESS — page-scoped styles (tokens in app/globals.css)
+   ------------------------------------------------------------------ */
+@keyframes dak-hint { 0% { transform: translateY(-100%); } 100% { transform: translateY(250%); } }
+@keyframes dak-still-in { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }
+.dak-still-in { animation: dak-still-in 0.9s var(--ease-expo) both; }
+
+/* die-cut stickers in the story */
+.dak-sticker { width: clamp(118px, 12vw, 176px); aspect-ratio: 1; will-change: transform, opacity; filter: drop-shadow(0 14px 18px rgba(16, 18, 22, 0.22)); }
+.dak-sticker > .face { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+.dak-sticker > .face::after { content: ""; position: absolute; inset: -40%; background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.55) 50%, transparent 60%); transform: translateX(var(--sheen, -120%)); pointer-events: none; }
+.dak-sticker[data-shape="burst"] > .face { clip-path: polygon(50% 0%, 61% 12%, 77% 6%, 80% 22%, 96% 26%, 89% 41%, 100% 54%, 86% 63%, 90% 79%, 74% 80%, 68% 96%, 54% 88%, 40% 99%, 32% 84%, 16% 88%, 16% 71%, 1% 64%, 11% 50%, 2% 36%, 18% 30%, 18% 13%, 34% 16%); }
+.dak-sticker[data-shape="circle"] > .face { border-radius: 50%; }
+.dak-sticker[data-shape="pill"] { aspect-ratio: 1.7; width: clamp(150px, 15vw, 220px); }
+.dak-sticker[data-shape="pill"] > .face { border-radius: 999px; }
+.dak-sticker[data-shape="square"] > .face { border-radius: 22%; }
+.dak-sticker .edge { position: absolute; inset: 5px; border: 2px dashed currentColor; opacity: 0.35; border-radius: inherit; }
+
+.dak-no-scrollbar { scrollbar-width: none; }
+.dak-no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* perforated tear-off edge between sections */
+.dak-perf { background-image: radial-gradient(circle at 10px 0, transparent 7px, currentColor 7.5px); background-size: 20px 12px; background-repeat: repeat-x; height: 12px; }
+
+/* range inputs */
+.dak-range { -webkit-appearance: none; appearance: none; width: 100%; height: 28px; background: transparent; cursor: pointer; }
+.dak-range::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(to right, var(--color-accent) var(--fill, 50%), color-mix(in srgb, currentColor 22%, transparent) var(--fill, 50%)); border-radius: 2px; }
+.dak-range::-moz-range-track { height: 2px; background: color-mix(in srgb, currentColor 22%, transparent); }
+.dak-range::-moz-range-progress { height: 2px; background: var(--color-accent); }
+.dak-range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -10px; border-radius: 6px; background: var(--color-accent); border: 3px solid var(--color-ink); box-shadow: 0 0 0 1px var(--color-accent); transition: transform .3s var(--ease-expo); }
+.dak-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 6px; background: var(--color-accent); border: 3px solid var(--color-ink); }
+.dak-range:active::-webkit-slider-thumb { transform: scale(1.18) rotate(45deg); }
+
+/* Default hidden state for story steps, stickers and overlays so they never overlap */
+[data-step], .dak-sticker, [data-toast], [data-spec], [data-readout] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#story .line-mask {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) { .dak-still-in { animation: none; } }
